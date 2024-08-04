@@ -89,6 +89,7 @@ userSchema.methods.generateJsonWebToken = function () {
 //Generating Reset Password Token
 userSchema.methods.getResetPasswordToken = function () {
   //Generating Token
+  console.log("in reset password");
   const resetToken = crypto.randomBytes(20).toString("hex");
 
   //Hashing and Adding Reset Password Token To UserSchema
