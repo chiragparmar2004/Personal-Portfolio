@@ -11,6 +11,7 @@ import skillRouter from "./routes/skill.route.js";
 import timelineRouter from "./routes/timeline.route.js";
 import projectRouter from "./routes/project.route.js";
 import softwareApplicationRouter from "./routes/softwareApplication.route.js";
+import { errorMiddleware } from "./middleware/error.js";
 
 const app = express();
 
@@ -46,6 +47,8 @@ app.use("/api/v1/project", projectRouter);
 app.get("/", (req, res) => {
   res.send("<h1>Hello this is backend of Chirag Project</h1>");
 });
+
+app.use(errorMiddleware);
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
