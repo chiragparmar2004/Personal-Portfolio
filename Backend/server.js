@@ -9,6 +9,8 @@ import userRouter from "./routes/user.route.js";
 import messageRouter from "./routes/message.route.js";
 import skillRouter from "./routes/skill.route.js";
 import timelineRouter from "./routes/timeline.route.js";
+import projectRouter from "./routes/project.route.js";
+import softwareApplicationRouter from "./routes/softwareApplication.route.js";
 
 const app = express();
 
@@ -38,8 +40,8 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/timeline", timelineRouter);
 app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/skill", skillRouter);
-// app.use("/api/v1/softwareapplication", softwareApplicationRouter);
-// app.use("/api/v1/project", projectRouter);
+app.use("/api/v1/softwareApplication", softwareApplicationRouter);
+app.use("/api/v1/project", projectRouter);
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello this is backend of Chirag Project</h1>");
