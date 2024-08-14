@@ -44,6 +44,18 @@ app.use("/api/v1/skill", skillRouter);
 app.use("/api/v1/softwareApplication", softwareApplicationRouter);
 app.use("/api/v1/project", projectRouter);
 
+app.get("/api/v1/checkingServer", (req, res) => {
+  try {
+    res.status(200).json({
+      message: "Successfully Connected to Backend Server",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to Connect to Backend Server",
+    });
+  }
+});
+
 app.get("/", (req, res) => {
   res.send("<h1>Hello this is backend of Chirag Project</h1>");
 });

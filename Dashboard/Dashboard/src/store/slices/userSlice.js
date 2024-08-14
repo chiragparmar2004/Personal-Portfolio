@@ -112,12 +112,19 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 export const login = (email, password) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
   try {
-    const { data } = await axios.post(
+    const response = await axios.post(
       `${backendUrl}/user/login`,
       { email, password },
-      { withCredentials: true, headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" } }
     );
-    dispatch(userSlice.actions.loginSuccess(data.user));
+
+    // Set the cookie manually
+    const token = response.data.token;
+    if (token) {
+      document.cookie = `token=${token}; path=/; SameSite=None; Secure`;
+    }
+
+    dispatch(userSlice.actions.loginSuccess(response.data.user));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
     // Check for a 404 status code
