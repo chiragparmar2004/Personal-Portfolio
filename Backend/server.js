@@ -1,7 +1,7 @@
 import express from "express";
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
-  import fileUpload from "express-fileupload";
+import fileUpload from "express-fileupload";
 import cors from "cors";
 import cloudinary from "cloudinary";
 import "dotenv/config";
@@ -20,11 +20,19 @@ connectDB();
 const PORT = process.env.PORT || 4000;
 app.use(
   cors({
-    origin: [process.env.PORTFOLIO_URL, process.env.DASHBOARD_URL],
+    origin: [
+      process.env.PORTFOLIO_URL,
+      process.env.DASHBOARD_URL,
+      process.env.DASHBOARD_URL2,
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
+console.log(`Portfolio URL: ${process.env.PORTFOLIO_URL}`);
+console.log(`Dashboard URL 1: ${process.env.DASHBOARD_URL}`);
+console.log(`Dashboard URL 2: ${process.env.DASHBOARD_URL2}`);
 
 app.use(cookieParser());
 app.use(express.json());
