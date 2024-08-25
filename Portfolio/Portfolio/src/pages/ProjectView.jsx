@@ -17,6 +17,9 @@ const ProjectView = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    // Scroll to top of the page when component mounts
+    window.scrollTo(0, 0);
+
     const getProject = async () => {
       await axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/project/get/${id}`, {
@@ -44,7 +47,10 @@ const ProjectView = () => {
     getProject();
   }, [id]);
 
-  const descriptionList = description.split(". ");
+  const descriptionList = description
+    .split(".")
+    .map((item) => item.trim())
+    .filter((item) => item !== "");
   const technologiesList = technologies.split(", ");
 
   const navigateTo = useNavigate();
